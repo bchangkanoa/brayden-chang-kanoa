@@ -1,7 +1,6 @@
 # Brayden Chang-Kanoa
 
 Honolulu, Hawaiʻi  
-808-476-0377 | bchangkanoa@gmail.com
 
 ## Education
 
