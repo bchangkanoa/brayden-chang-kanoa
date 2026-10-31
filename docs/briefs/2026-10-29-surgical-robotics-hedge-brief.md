@@ -1,4 +1,3 @@
-
 ---
 type: brief
 engagement: fx-hedging
@@ -10,6 +9,7 @@ status: committed
 hypothesis: "I expect the forward contract to provide higher guaranteed dollar proceeds than the money-market hedge because it locks in a rate for the full EUR 9.4 million receivable."
 llm_used: "ChatGPT"
 ---
+
 
 # Surgical Robotics — FX Hedging Executive Brief
 
