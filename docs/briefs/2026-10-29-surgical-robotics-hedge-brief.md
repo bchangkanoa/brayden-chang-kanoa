@@ -33,7 +33,11 @@ The primary objective is to protect the dollar value of the €9,400,000 receiva
 
 ## Methods
 
-A forward contract would allow the company to lock in an exchange rate today for the payment due in 365 days. This provides certainty about future dollar proceeds but prevents the company from benefiting if the euro strengthens. A money-market hedge would use borrowing and investing in different currencies to establish a predictable dollar value, although it requires financing and depends on available interest rates. Purchasing euro put options would protect against a declining euro while allowing the company to benefit if the euro appreciates, but requires an upfront premium.
+**Forward Contract:** A forward contract would allow the company to lock in an exchange rate today for the €9,400,000 payment due in 365 days. This provides certainty about future dollar proceeds but prevents the company from benefiting if the euro strengthens.
+
+**Money-Market Hedge:** A money-market hedge would allow the company to establish a predictable dollar value through borrowing and investing. First, the company would borrow euros today equal to the present value of the €9,400,000 receivable, calculated using the euro borrowing rate. The borrowed euros would then be converted into U.S. dollars at the current spot exchange rate and invested at the U.S. interest rate for 365 days. When the German hospital pays the €9,400,000, the company would use that payment to repay the euro loan. This strategy provides predictable dollar proceeds but requires financing and depends on available interest rates.
+
+**Euro Put Option:** Purchasing euro put options would protect the company against a declining euro while allowing it to benefit if the euro appreciates. The scenario provides a premium of $0.0245 per euro, which would cost $230,300 upfront for the entire €9,400,000 receivable (€9,400,000 × $0.0245). Although the option provides downside protection and potential upside, the premium represents an additional cost regardless of whether the option is exercised.
 
 **Hypothesis:** I expect the forward contract to provide higher guaranteed dollar proceeds than the money-market hedge because it locks in the exchange rate for the entire receivable without an upfront option premium. Using the scenario's indicative forward rate of $1.1807 per euro, a forward contract would secure approximately $11,098,580 if that quote is available.
 
