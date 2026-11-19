@@ -1,145 +1,53 @@
-# Stage 4 — Market Data and Population Memo
+## 6. Workbook Population and Validation Results
 
-**Project:** FX Hedging — Surgical Robotics  
-**Scenario:** Scenario 3 — Surgical Robotics  
-**Author:** Brayden Chang-Kanoa  
-**Date Prepared:** November 18, 2026  
-**Market Observation Date:** November 17, 2026  
-**Status:** Market data collected; workbook population and validation pending
+The existing Excel workbook was populated with the November 17, 2026 market observations through the named-range input cells. The original scenario forward quote, receivable amount, settlement horizon, and option premiums remained unchanged.
 
-## 1. Purpose
+### Workbook Validation
 
-The purpose of this memo is to document the market inputs selected for the Surgical Robotics foreign exchange hedging model. The company expects to receive €9,400,000 from a German hospital group in 365 days and must evaluate strategies to manage its exposure to changes in the EUR/USD exchange rate.
+The workbook was reviewed in Microsoft Excel after population. The following results were confirmed:
 
-The selected inputs use November 17, 2026 observations to maintain a consistent market reference date. The European Central Bank (ECB) provides the EUR/USD exchange rate and euro-denominated government yield, while the Federal Reserve Bank of St. Louis (FRED) provides the U.S. Treasury yield.
+| Validation | Result |
+|---|---|
+| Forward hedge proceeds | $11,098,580 |
+| Money-market hedge proceeds | $10,494,252 |
+| Put-option net proceeds | $10,088,619.06 |
+| CIP-implied forward | 1.116410 USD/EUR |
+| Parity deviation | 5.44509% |
+| Validation checks | 11 PASS, 1 INVESTIGATE, 0 FAIL |
 
-## 2. Market Inputs and Sources
+The sensitivity table recalculated across 11 scenarios, ranging from a 5% decrease to a 5% increase in the EUR/USD spot rate. The forward and money-market proceeds remained fixed across the scenarios, while the unhedged and put-option proceeds changed with the settlement exchange rate.
 
-| Input | Value | Source | Observation Date | Notes |
-|---|---|---|---|---|
-| `S0_in` | 1.0989 USD/EUR | ECB — Euro Foreign Exchange Reference Rates | Nov. 17, 2026 | Official reference rate; not an executable bank quote |
-| `R_USD` | 4.60% | FRED — DGS1 | Nov. 17, 2026 | One-year U.S. Treasury yield proxy |
-| `R_FC` | 2.977566% | ECB — AAA 1-Year Government Bond Spot Yield | Nov. 17, 2026 | Original continuously compounded yield |
-| `R_FC` (model input) | 2.980937% | Calculated from ECB yield | Nov. 17, 2026 | Converted to simple ACT/360 convention |
-| `F0_in` | 1.1807 USD/EUR | Assigned scenario | Scenario-provided | Bank forward quote retained |
-| `K_PUT` | 1.0989 USD/EUR | Set equal to live spot | Nov. 17, 2026 | At-the-money put strike |
-| `K_CALL` | 1.0989 USD/EUR | Set equal to live spot | Nov. 17, 2026 | At-the-money call strike |
-| `PREM_PUT` | $0.0245/EUR | Assigned scenario | Scenario-provided | Premium retained; not a live quote |
-| `PREM_CALL` | $0.0448/EUR | Assigned scenario | Scenario-provided | Premium retained; not a live quote |
-| `FC_AMT` | €9,400,000 | Assigned scenario | Scenario-provided | Contractual receivable |
-| `T_DAYS` | 365 | Assigned scenario | Scenario-provided | Exposure horizon |
-| `BASIS` | 360 | Model specification | Model assumption | ACT/360 day-count convention |
+The parity deviation remained flagged as INVESTIGATE. No inputs or formulas were changed to force the check to pass.
 
-**Retrieval date:** November 18, 2026. Exact retrieval clock times were not recorded and are not represented as independently verified timestamps.
+### FX Hedging Lab Cross-Check
 
-### Source Links
+The workbook's results were compared with the professor's FX Hedging Lab using the same market inputs.
 
-**European Central Bank — EUR/USD Spot Rate**
+| Calculation | Excel Workbook | FX Hedging Lab | Comparison |
+|---|---:|---:|---|
+| Forward hedge | $11,098,580 | $11,098,580 | Match |
+| EUR borrowing | €9,124,235 | €9,124,235 | Match |
+| USD conversion | $10,026,622 | $10,026,622 | Match |
+| Money-market hedge | $10,494,252 | $10,494,252 | Match |
+| CIP-implied forward | 1.116410 | 1.1164 | Match within displayed precision |
+| Put-option net proceeds at spot | $10,088,619.06 | $10,099,360.00 | Difference of $10,740.94 |
 
-https://www.ecb.europa.eu/stats/exchange/eurofxref/shared/pdf/2026/11/20261117.pdf
+The forward, money-market, and covered interest parity calculations matched the FX Hedging Lab.
 
-**Federal Reserve Bank of St. Louis — One-Year Treasury Yield**
+The put-option results differed because of how the option premium was treated. The FX Hedging Lab deducted the original upfront premium of $230,300, while the Excel workbook deducted the premium accumulated to maturity of $241,040.94.
 
-https://fred.stlouisfed.org/series/DGS1
+The Excel workbook uses the formula:
 
-**European Central Bank — One-Year AAA Government Bond Yield**
+`=FC_AMT*MAX(B12,K_PUT)+FV_PREM_PUT`
 
-https://data.ecb.europa.eu/data/datasets/YC/YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_1Y
+This formula accounts for the financing cost of the upfront premium, consistent with the Stage 2 specification.
 
-ECB series identifier: `YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_1Y`
+The difference of $10,740.94 was therefore attributed to the premium-financing convention rather than an arithmetic error. The existing formula was retained, and the difference was documented.
 
-The ECB yield of 2.977566% was read from the ECB Data Portal chart displaying November 17, 2026.
+### Structural Fixes
 
-## 3. Interest Rate Selection and Assumptions
+No structural formula changes were required during Stage 4 testing.
 
-The U.S. interest rate is the one-year constant-maturity Treasury yield published by FRED. This rate was selected because its maturity closely matches the company's 365-day exposure.
+The input-source notes and assumptions documentation were updated to reflect the ECB and FRED market observations. The model's calculations, sensitivity analysis, and validation checks continued to operate after the new inputs were entered.
 
-The euro interest rate is the ECB's one-year AAA euro-area government bond spot yield. This rate was selected because it is denominated in euros and matches the exposure's approximate maturity.
-
-Both interest rates are government-yield proxies rather than executable corporate borrowing or investment rates. The U.S. Treasury yield and ECB AAA spot yield also use different quotation conventions, requiring an adjustment before comparison.
-
-### Conversion of the ECB Yield
-
-The ECB reports its yield using continuous compounding, while the hedging workbook uses simple interest with an ACT/360 convention.
-
-The converted euro rate is calculated as:
-
-`R_FC = [EXP(0.02977566 × 365/365) − 1] / (365/360)`
-
-**Converted EUR rate = 2.980937%**
-
-The converted rate will be entered into the workbook's `R_FC` named-range input cell.
-
-This conversion matches the one-year effective accumulation factor while expressing the rate using the workbook's 365/360 simple-interest convention.
-
-## 4. Covered Interest Parity Calculation
-
-Covered interest parity (CIP) provides a theoretical forward exchange rate based on the spot rate and the two interest rates.
-
-The model uses:
-
-`F_CIP = S0 × (1 + R_USD × T/BASIS) / (1 + R_FC × T/BASIS)`
-
-Using the selected inputs:
-
-- Spot rate: 1.0989 USD/EUR
-- USD interest rate: 4.60%
-- Converted EUR interest rate: 2.980937%
-- Time: 365 days
-- Day-count basis: 360
-
-**CIP-implied forward rate: 1.116410 USD/EUR**
-
-**Assigned bank forward rate: 1.180700 USD/EUR**
-
-### Forward Rate Comparison
-
-| Measure | Result |
-|---|---:|
-| Bank forward quote | 1.180700 |
-| CIP-implied forward | 1.116410 |
-| Difference (bank minus CIP) | +0.064290 USD/EUR |
-| Difference relative to CIP-implied forward | +5.7587% |
-| Proceeds using bank quote | $11,098,580 |
-| Proceeds using CIP-implied rate | $10,494,252 |
-| Difference in USD proceeds | +$604,328 |
-
-The bank's assigned forward quote is substantially higher than the theoretical CIP-implied forward rate.
-
-This discrepancy will remain flagged for investigation. The bank quote will not be changed to force the parity check to pass.
-
-Because the calculation uses government-yield proxies rather than executable borrowing and lending rates, the difference does not independently establish an arbitrage opportunity. A bank requote or matched-tenor executable market rates would be needed for a stronger pricing assessment.
-
-## 5. Option Assumptions
-
-The put and call strikes are set equal to the selected EUR/USD spot rate of 1.0989 USD/EUR.
-
-The original scenario premiums remain unchanged:
-
-- EUR put premium: $0.0245 per EUR
-- EUR call premium: $0.0448 per EUR
-
-These premiums are scenario-provided assumptions, not independently retrieved market option prices.
-
-## 6. Workbook Population and Validation Plan
-
-The updated market values will be entered into the existing Excel workbook through the appropriate named-range input cells.
-
-The following checks will be performed after population:
-
-1. Confirm all hedge calculations recalculate correctly.
-2. Verify that the sensitivity table and chart update around the new spot rate.
-3. Re-run the covered interest parity validation and record the deviation.
-4. Confirm the forward, money-market, and option calculations remain formula-driven.
-5. Compare workbook outputs against the professor's FX Hedging Lab.
-6. Document any discrepancies or structural fixes before submission.
-
-These checks are pending and will be updated after the workbook has been populated and tested.
-
-## 7. Limitations and Next Steps
-
-The selected data represent a common November 17, 2026 observation date rather than the November 18 market close. This choice aligns the inputs using the latest mutually selected completed observation date.
-
-The ECB exchange rate is an informational reference rate, and the interest rates are government-yield proxies. They may differ from rates available to the company for actual transactions.
-
-The next step is to populate the Excel workbook with the selected inputs, perform the validation checks, and cross-check the results against the FX Hedging Lab. Any unresolved discrepancies will be carried forward into Stage 5.
+The unresolved parity deviation will be addressed in Stage 5.
