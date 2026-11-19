@@ -1,4 +1,3 @@
-
 # Stage 2 — AI Prompt Log
 
 ## Project
@@ -26,8 +25,23 @@ Review my specification against the professor's template and identify anything t
 **AI assistance:**
 ChatGPT helped identify missing requirements, including the required four-column input table, workbook structure, and validation checks.
 
-**My review:**
-I requested revisions to ensure the specification followed the original template rather than an alternative format.
+**My review and revisions:**
+
+After reviewing the identified gaps, I requested revisions to ensure the specification followed the professor's original template. The following changes were made:
+
+**1. Input Table**
+- Before: The initial draft did not fully organize the required inputs into the professor's four-column format or clearly distinguish input variables from calculated values.
+- After: Section 2.1 was revised to include standardized names, descriptions and sources, units, and example values. Section 2.2 separately identifies derived values and their formulas. The specification also identifies the market inputs that require verified sources and dates.
+
+**2. Workbook Structure**
+- Before: The initial draft did not clearly identify all workbook tabs or explain their individual purposes.
+- After: Section 3 was revised to identify all eight workbook tabs and their functions: Cover, Legend/Key, Inputs, Forward, Money Market, Options, Sensitivity, and Notes & Assumptions. The Cover tab specification was also updated to include the author and a data-source block.
+
+**3. Validation Checks**
+- Before: The initial draft did not include a complete checklist for verifying the calculations and workbook structure.
+- After: Section 6.3 was expanded to include eleven validation checks. These cover named ranges, spreadsheet errors, formula-based outputs, forward proceeds, money-market calculations, interest rate parity, option payoffs, sensitivity scenarios, and formatting.
+
+These revisions improved the specification's clarity and made the model easier to reproduce and audit during Stage 3.
 
 ## Interaction 3 — Revising Inputs and Assumptions
 
@@ -35,10 +49,10 @@ I requested revisions to ensure the specification followed the original template
 Help review the financial assumptions, placeholder values, and calculations to ensure they are appropriate for my scenario.
 
 **AI assistance:**
-ChatGPT explained the ACT/360 interest convention, money-market hedge calculations, currency option premiums, and interest rate parity. It also helped identify which market inputs would need to be updated in Stage 4.
+ChatGPT explained the ACT/360 interest convention, money-market hedge calculations, currency option premiums, and interest rate parity. It also helped identify which market inputs needed verified market data.
 
 **My review:**
-I examined the assumptions and checked that the model continued to focus on protecting the company's euro receivable.
+I examined the assumptions and checked that the model continued to focus on protecting the company's euro receivable. I also reviewed the distinction between the EUR put used for the receivable and the EUR call retained for a hypothetical payable.
 
 ## Interaction 4 — Improving Document Formatting
 
@@ -62,8 +76,21 @@ ChatGPT converted the document into Markdown while preserving the headings, tabl
 **My review:**
 I reviewed the Markdown formatting to prepare the final specification for submission.
 
+## Interaction 6 — Addressing Stage 2 Feedback
+
+**My request:**
+Help me review my professor's Stage 2 feedback and identify the specific corrections needed in my GitHub files.
+
+**AI assistance:**
+ChatGPT helped explain the feedback and identify the necessary changes to the market input documentation, Cover tab description, version information, and AI prompt log.
+
+**My review:**
+I reviewed the suggested changes and updated the specification to include additional Cover tab documentation. I also expanded this prompt log to document the specific before-and-after changes made to the input table, workbook structure, and validation checks.
+
 ## Summary of AI Use
 
-My work began with the surgical robotics scenario and the hedging analysis developed during Stage 1. I used ChatGPT primarily to help organize my work into the required technical specification, review the professor's requirements, explain financial assumptions, improve formatting, and prepare the Markdown version for GitHub.
+My work began with the surgical robotics scenario and the hedging analysis developed during Stage 1. I used ChatGPT to help organize my work into the required technical specification, review the professor's requirements, explain financial assumptions, improve formatting, and prepare the Markdown version for GitHub.
 
-ChatGPT also assisted with developing and checking some of the technical formulas and validation procedures. I remained responsible for reviewing the content and requesting revisions to ensure the final specification matched the assignment requirements.
+ChatGPT also assisted with developing and checking technical formulas and validation procedures. Following the Stage 2 review, I used ChatGPT to identify corrections and improve the documentation of my revisions.
+
+I remained responsible for reviewing the content, evaluating the financial assumptions, and requesting changes to ensure the specification met the assignment requirements.
