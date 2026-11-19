@@ -184,7 +184,7 @@ The implied forward rate was approximately 1.122429, compared with the assigned 
 I retained the `INVESTIGATE` status rather than changing the inputs or formulas to force the check to pass.
 
 **Result:**
-Eleven validation checks displayed `PASS`, one displayed `INVESTIGATE`, and none displayed `FAIL`. The parity deviation remains documented for further investigation in Stage 4.
+Eleven validation checks displayed `PASS`, one displayed `INVESTIGATE`, and none displayed `FAIL`. The parity deviation remained documented for further investigation in Stage 4.
 
 ## Interaction 13 — Preparing the Audit Report and GitHub Submission
 
@@ -200,12 +200,124 @@ I reviewed the audit report against the checks I performed in Excel. I uploaded 
 **Result:**
 The workbook and audit report were committed to GitHub.
 
-## Summary of AI Use
+# Stage 4 — Market Data and Population
 
-My work began with the surgical robotics scenario and the hedging analysis developed during Stage 1. I used ChatGPT to help organize my work into the required technical specification, review the professor's requirements, explain financial assumptions, improve formatting, and prepare the Markdown version for GitHub.
+## Interaction 14 — Researching and Manually Verifying Market Data Sources
+
+**My request:**
+I asked ChatGPT to help me search for reliable sources for the EUR/USD spot exchange rate and the one-year USD and EUR interest rates. I initially wanted to use FRED for all three inputs to maintain consistency, but after reviewing the available series, I asked ChatGPT to help locate appropriate data on the European Central Bank's website.
+
+**AI assistance:**
+ChatGPT helped identify potential market data sources, locate the relevant FRED and ECB series, and explain which interest-rate benchmarks would be suitable for my 365-day foreign currency exposure. It also helped compare different rate choices and provided links to the official data sources.
+
+**My review and independent verification:**
+After ChatGPT helped identify the sources, I personally visited the websites to verify the information. I reviewed the ECB Data Portal, checked the published one-year euro-area AAA government bond yield, and confirmed the observation date and reported value. I also reviewed the selected ECB exchange-rate and FRED interest-rate information.
+
+I did not rely solely on ChatGPT's reported figures. I used the original data sources to review the observations and selected November 17, 2026 as the common market observation date.
+
+**Result:**
+I selected the ECB EUR/USD reference rate of 1.0989, the FRED one-year USD Treasury yield of 4.60%, and the ECB one-year EUR government bond yield of 2.977566%.
+
+## Interaction 15 — Converting Interest Rates and Calculating CIP
+
+**My request:**
+I asked ChatGPT to explain how to convert the ECB's continuously compounded one-year EUR yield into the simple ACT/360 convention required by my workbook.
+
+**AI assistance:**
+ChatGPT helped explain the conversion and calculate the covered interest parity (CIP) implied forward rate using the selected market observations.
+
+**My review:**
+I entered the converted EUR rate of 2.980937% into Excel, together with the ECB spot rate of 1.0989 and the FRED USD rate of 4.60%.
+
+I reviewed the recalculated results in my workbook and confirmed that the assigned bank forward quote of 1.1807 remained unchanged.
+
+**Result:**
+The workbook calculated a CIP-implied forward rate of approximately 1.116410. The discrepancy between the bank quote and theoretical forward rate remained flagged for investigation.
+
+## Interaction 16 — Populating the Excel Workbook
+
+**My request:**
+I asked ChatGPT to guide me through updating the existing Excel workbook with the selected and reviewed market data.
+
+**AI assistance:**
+ChatGPT helped identify the correct input cells and explained how to update the market values without overwriting the workbook's formulas.
+
+**My review:**
+I personally downloaded the workbook from GitHub, opened it in Microsoft Excel, and manually entered the market inputs.
+
+I also updated the source documentation in the Inputs and Notes & Assumptions worksheets to reflect the ECB and FRED observations.
+
+The put and call strikes remained linked to the updated spot rate, while the scenario-provided forward quote and option premiums remained unchanged.
+
+**Result:**
+The workbook was populated with the November 17, 2026 market observations without requiring structural formula changes.
+
+## Interaction 17 — Reviewing the Updated Workbook
+
+**My request:**
+I asked ChatGPT to help review the workbook after entering the new market observations.
+
+**AI assistance:**
+ChatGPT reviewed screenshots of the Money Market, Options, Notes & Assumptions, and Sensitivity worksheets. It helped compare the recalculated amounts with the expected financial calculations and identify whether the model continued to function properly.
+
+**My review:**
+I opened each worksheet in Excel, reviewed the updated calculations, and sent screenshots to ChatGPT for additional verification.
+
+I confirmed that the sensitivity analysis recalculated around the new spot rate and that the forward and money-market proceeds remained fixed across the scenarios.
+
+**Result:**
+The workbook reported 11 `PASS`, 1 `INVESTIGATE`, and 0 `FAIL` validation checks. The parity deviation remained approximately 5.44509% under the workbook's calculation convention.
+
+## Interaction 18 — Cross-Verifying Results Against the FX Hedging Lab
+
+**My request:**
+I asked ChatGPT to help me independently cross-check my Excel workbook against the professor's FX Hedging Lab.
+
+**AI assistance:**
+ChatGPT guided me through entering the same market inputs into the FX Hedging Lab and helped compare the lab's calculations against my Excel workbook.
+
+ChatGPT also assisted in identifying and explaining a discrepancy between the put-option results in the two models.
+
+**My review and independent verification:**
+I personally opened the professor's FX Hedging Lab, manually entered the selected market inputs, and reviewed the calculated results.
+
+I compared the lab's forward hedge, money-market hedge, and CIP-implied forward calculations against my Excel workbook, with ChatGPT assisting in the comparison.
+
+The forward, money-market, and CIP results matched within the displayed precision.
+
+However, the put-option proceeds differed by $10,740.94. With ChatGPT's assistance, I investigated the discrepancy by reviewing the formula in my Excel workbook.
+
+I determined that my workbook deducted the financed option premium of $241,040.94, while the FX Hedging Lab deducted the original upfront premium of $230,300.
+
+I retained the original workbook formula because financing the premium through maturity was consistent with my Stage 2 specification.
+
+**Result:**
+The FX Hedging Lab cross-check confirmed agreement for the forward, money-market, and CIP calculations. The put-option difference was explained and documented as a difference in premium-financing conventions rather than changing the workbook to force the results to match.
+
+## Interaction 19 — Preparing the Stage 4 Market-Data Memo
+
+**My request:**
+I asked ChatGPT to help organize the selected market observations, source documentation, CIP calculation, workbook validation, and FX Hedging Lab comparison into the required Stage 4 market-data memo.
+
+**AI assistance:**
+ChatGPT helped draft and revise the Markdown memo, including the market-data table, source links, interest-rate conversion, forward-rate comparison, validation results, and FX Lab discrepancy.
+
+**My review:**
+I reviewed the memo to ensure that it reflected the market data I had checked, the values I entered into Excel, and the cross-verification performed using the FX Hedging Lab.
+
+I then updated the memo and committed the populated Excel workbook to GitHub.
+
+**Result:**
+The Stage 4 market-data memo was saved at `data/2026-11-18-surgical-robotics-market-data-memo.md`, and the updated workbook was committed at `capabilities/fx-hedging/model.xlsx`.
+
+# Summary of AI Use
+
+My work began with the surgical robotics scenario and the hedging analysis developed during Stage 1. I used ChatGPT to help organize my analysis into the required technical specification, review the professor's requirements, explain financial assumptions, improve formatting, and prepare the Markdown files for GitHub.
 
 During Stage 3, ChatGPT generated the Excel workbook based on my specification and assisted with the auditing process. I opened the workbook in Microsoft Excel and manually reviewed the named ranges, hedge calculations, sensitivity analysis, and validation checks before sending screenshots to ChatGPT for additional verification.
 
-I tested the workbook by changing the spot exchange rate and confirming that the calculations and chart updated appropriately. I also reviewed the interest rate parity deviation and retained the investigation flag rather than forcing the check to pass.
+**During Stage 4, I primarily used ChatGPT as a research assistant to help locate appropriate market data sources. After receiving its suggestions, I personally visited the ECB and FRED websites to review the published observations and verify the numbers rather than relying solely on AI-generated information.** I selected the market inputs, entered them into Excel, and updated the source documentation.
 
-I remained responsible for reviewing the AI-generated work, checking the financial calculations, identifying limitations, and documenting the results of my audit. The outstanding market-rate and interest-rate parity issues will be revisited during Stage 4.
+**I also used ChatGPT to assist with cross-verification against the professor's FX Hedging Lab.** I manually entered the inputs into the lab and compared its results with my Excel workbook. ChatGPT helped interpret the comparisons and investigate the put-option discrepancy. After reviewing the formula, I retained the original premium-financing convention and documented the reason for the difference.
+
+Throughout the project, I remained responsible for selecting and reviewing the sources, checking the calculations, testing the workbook, interpreting the results, and documenting any limitations. The interest rate parity discrepancy was preserved for further investigation rather than adjusting the inputs to force the model to pass.
