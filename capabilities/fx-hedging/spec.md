@@ -10,8 +10,8 @@
 | Created by | Brayden Chang-Kanoa |
 | Updated by | Brayden Chang-Kanoa |
 | Date Created | 2026-11-06 |
-| Date Updated | 2026-11-06 |
-| Version | 0.0 |
+| Date Updated | 2026-11-18 |
+| Version | 0.3 |
 | LLM Used | ChatGPT — Inputting Data into Template, Revisions, and Layout Creation |
 | Role | Treasury Analyst / FP&A Analyst |
 | Audience | CFO / Director of Treasury |
@@ -53,7 +53,7 @@ A U.S. surgical robotics manufacturer has a €9,400,000 receivable from a Germa
 
 Receivable, full notional, single settlement at 365 days; USD per EUR throughout. Simple interest on both legs with ACT/360 (BASIS = 360). No bid–ask spreads, taxes, counterparty risk, fees, partial hedges, or probability weights. Option premiums are paid in USD at inception and carried to settlement at R_USD as an opportunity cost. The put protects the receivable; call inputs are retained for the template’s payable extension, not treated as an additional receivable hedge. Covered interest parity is a benchmark, not a guarantee for independently quoted market inputs.
 
-Workbook tabs and purpose: Cover (scope, date, executive outputs); Legend/Key (yellow editable inputs, blue assumptions, black formulas, green cross-tab links, gray outputs); Inputs (single source of all named ranges); Forward (locked proceeds); Money Market (visible borrowing, conversion, investment steps); Options (put payoff and premium); Sensitivity (11-row comparison, hedge profits, winners, chart); Notes & Assumptions (source URLs, retrieval dates, basis, exclusions, audit findings). No hard-coded outputs.
+Workbook tabs and purpose: Cover (project scope, report date, author: Brayden Chang-Kanoa, executive outputs, and a data-source block listing the EUR/USD spot rate, USD and EUR interest rates, forward quote, option premiums, their sources, and quote dates); Legend/Key (yellow editable inputs, blue assumptions, black formulas, green cross-tab links, gray outputs); Inputs (single source of all named ranges); Forward (locked proceeds); Money Market (visible borrowing, conversion, investment steps); Options (put payoff and premium); Sensitivity (11-row comparison, hedge profits, winners, chart); Notes & Assumptions (source URLs, retrieval dates, basis, exclusions, audit findings). No hard-coded outputs.
 
 ## 4. Calculation Flow
 
