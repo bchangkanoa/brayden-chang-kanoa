@@ -188,3 +188,4 @@ Save as capabilities/fx-hedging/spec.md, update the folder README.md, and commit
 |---|---|---|---|
 | 0.1 | 2026-11-06 | Student / AI-assisted | Initial Stage 2 specification draft using Scenario 3. |
 | 0.2 | 2026-11-06 | Student / AI-assisted | Added workbook tab purposes and validation checks; clarified at-spot put/call strikes and exact placeholder disclosure. |
+| 0.3 | 2026-11-18 | Student / AI-assisted | Addressed Stage 2 feedback by adding author and data-source requirements to the Cover tab, updating version information, and expanding the AI prompt log to document before-and-after revisions. |
